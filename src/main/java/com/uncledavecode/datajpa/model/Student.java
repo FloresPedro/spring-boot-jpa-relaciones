@@ -27,4 +27,7 @@ public class Student {
     private String lastname;
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
+
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    private ContactInfo contactInfo;
 }

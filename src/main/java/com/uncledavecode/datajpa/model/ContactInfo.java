@@ -21,4 +21,9 @@ public class ContactInfo {
     private Long id;
     private String email;
     private String phone, address,city,state,zip;
+
+    //relacion utilizando llave foranea
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "student_id")
+    private Student student;
 }
