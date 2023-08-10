@@ -29,5 +29,7 @@ public class Student {
     private LocalDate birthDate;
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    //con esto indicamos que los valores de la llave primaria student van a ser compartidos como la llave primaria de contact_info
+    @PrimaryKeyJoinColumn
     private ContactInfo contactInfo;
 }
