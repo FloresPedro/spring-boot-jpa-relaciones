@@ -1,11 +1,14 @@
 package com.uncledavecode.datajpa.model;
 
+import com.uncledavecode.datajpa.model.embedded_id.StudentCourse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "course")
@@ -28,4 +31,13 @@ public class Course {
     //LAZZY: que no se traiga todos los cursos relacionados con el instructor solo si se solicita(instructor.getCourses())
     @ManyToOne(fetch = FetchType.EAGER)
     private Instructor instructor;
+
+    //Relacion muchos a mucho
+    //idClass
+//    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+//    private Set<StudentCourse> studentCourses = new HashSet<>();
+
+    //EmbeddedId
+    @OneToMany(mappedBy = "course")
+    private Set<StudentCourse> studentCourses = new HashSet<>();
 }
