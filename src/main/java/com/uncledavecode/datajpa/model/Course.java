@@ -22,4 +22,10 @@ public class Course {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    //Relacion uno a muchos bidireccional: le decimos a hibernate que todos los datos deben de ser obtenidos inmediatamente
+    //es decir optener todos los cursos del instructor en la primera llamada
+    //LAZZY: que no se traiga todos los cursos relacionados con el instructor solo si se solicita(instructor.getCourses())
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Instructor instructor;
 }
