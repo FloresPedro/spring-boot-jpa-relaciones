@@ -15,7 +15,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Course {
 
     @Id
@@ -40,4 +39,14 @@ public class Course {
     //EmbeddedId
     @OneToMany(mappedBy = "course")
     private Set<StudentCourse> studentCourses = new HashSet<>();
+
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", instructor=" + instructor +
+                '}';
+    }
 }

@@ -16,8 +16,14 @@ import java.util.Set;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
 public class Student {
+
+    public Student(String firstName, String lastName, LocalDate birthday) {
+        this.firstname = firstName;
+        this.lastname = lastName;
+        this.birthDate = birthday;
+        this.age = birthday.until(LocalDate.now()).getYears();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_generator")
@@ -30,6 +36,9 @@ public class Student {
     private String lastname;
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
+
+    @Transient
+    private int age;
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
     //con esto indicamos que los valores de la llave primaria student van a ser compartidos como la llave primaria de contact_info
@@ -50,4 +59,14 @@ public class Student {
     //EmbeddedId
     @OneToMany(mappedBy = "student")
     private Set<StudentCourse> studentCourses = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstname + '\'' +
+                ", lastName='" + lastname + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
+    }
 }
